@@ -43,10 +43,22 @@ $(function() {
         });
     }
 
+    function loadAttendance() {
+        $.ajax({
+            url: 'attendances/list',
+            type: 'GET',
+            success: function(data) {
+                $('#attendance-data').html(data);
+            }
+        });
+    }
+
     $(document).on('load', '.class',function() {
         loadData();
+        loadAttendance();
     });
     loadData();
+    loadAttendance();
 
     $(document).on("click", ".ajax-modal", function() {
 
@@ -71,6 +83,18 @@ $(function() {
             success: function(data) {
                 if (data == 1) {
                     toastr.success("Successfully deleted");
+                    loadData();
+                }
+                if (data == 2) {
+                    toastr.success("Successfully Canceled");
+                    loadData();
+                }
+                if (data == 3) {
+                    toastr.success("Successfully Approved");
+                    loadData();
+                }
+                if (data == 4) {
+                    toastr.success("Successfully Rejected");
                     loadData();
                 }
             }
@@ -103,8 +127,49 @@ $(function() {
                         toastr.success("Successfully Updated");
                         loadData();
                     }
+                    if (data == 2) {
+                        toastr.error('You are not allowed to take leave for this month');
+                        loadData();
+                    }
+                    if (data == 3) {
+                        $('form').trigger("reset");
+                        toastr.success('Successfully Applied');
+                        loadData();
+                    }
+                    if (data == 4) {
+                        toastr.success('Successfully Re-Applied');
+                        loadData();
+                    }
                 }
             });
         }
+    });
+
+    $(document).on("click",".ajax-submit",function(){
+        event.preventDefault();
+        var elem = $(this);
+        var link = $(this).attr("href");
+        $.ajax({
+            method: "POST",
+            url: link,
+            mimeType:"multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(data){
+                if (data == 3) {
+                    toastr.error('Already Checked Out');
+                    loadAttendance();
+                }
+                if (data == 1) {
+                    toastr.success('Checked In');
+                    loadAttendance();
+                }
+                if (data == 2) {
+                    toastr.success('Checked Out');
+                    loadAttendance();
+                }
+            }
+        });
     });
 });
