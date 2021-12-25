@@ -4,13 +4,22 @@
             <label class="control-label">Subject <span class="required">*</span></label>
             <input type="text" class="form-control my-2" name="subject" required>
         </div>
+        <div class="form-group col-md-12">
+            <label class="control-label">Leave Type <span class="required">*</span></label>
+            <select class="form-control my-2" name="leave_type">
+                <option value="">Select One</option>
+                <?php foreach ($types as $type): ?>
+                    <option value="<?php echo $type['id']; ?>"><?php echo $type['title']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
         <div class="form-group col-md-6">
             <label class="control-label">From <span class="required">*</span></label>
-            <input type="date" class="form-control mb-2" name="from_date">
+            <input type="date" class="form-control my-2" name="from_date">
         </div>
         <div class="form-group col-md-6">
             <label class="control-label">To <span class="required">*</span></label>
-            <input type="date" class="form-control mb-2" name="to_date">
+            <input type="date" class="form-control my-2" name="to_date">
         </div>
         <div class="form-group col-md-12">
             <label class="control-label">Description <span class="required">*</span></label>

@@ -10,6 +10,7 @@ class LeaveApplications extends CI_Controller{
     date_default_timezone_set('Asia/Kathmandu');
     $this->load->database();
     $this->load->model('LeaveApplication_model');
+    $this->load->model('LeaveType_model');
   }
 
   public function index()
@@ -19,7 +20,8 @@ class LeaveApplications extends CI_Controller{
 
   public function create()
   {
-      $this->load->view('frontend/leave_applications/application-create');
+      $data = $this->LeaveType_model->lists();
+      $this->load->view('frontend/leave_applications/application-create', $data);
   }
 
   public function store()
@@ -32,6 +34,7 @@ class LeaveApplications extends CI_Controller{
           $data['from_date'] = $this->input->post('from_date');
           $data['to_date'] = $this->input->post('to_date');
           $data['description'] = $this->input->post('description');
+          $data['leave_type'] = $this->input->post('leave_type');
           $data['created_at'] = $created_at;
           $data['updated_at'] = $created_at;
 
@@ -60,8 +63,9 @@ class LeaveApplications extends CI_Controller{
 
   public function edit($id)
   {
-      $data = $this->LeaveApplication_model->show($id);
-      return $this->load->view('frontend/leave_applications/application-edit', $data);
+      $array['application'] = $this->LeaveApplication_model->show($id);
+      $array['types'] = $this->LeaveType_model->lists();
+      return $this->load->view('frontend/leave_applications/application-edit', $array);
   }
 
   public function update($id)
@@ -73,6 +77,7 @@ class LeaveApplications extends CI_Controller{
           $data['from_date'] = $this->input->post('from_date');
           $data['to_date'] = $this->input->post('to_date');
           $data['description'] = $this->input->post('description');
+          $data['leave_type'] = $this->input->post('leave_type');
           $data['status'] = 0;
           $data['updated_at'] = $created_at;
 

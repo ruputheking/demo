@@ -6,7 +6,11 @@
         </td>
     </tr>
     <tr>
-        <td>Applied Leave Date</td>
+        <td>Leave Type</td>
+        <td><?php echo $application[0]['leave_title']; ?></td>
+    </tr>
+    <tr>
+        <td>Applied For</td>
         <td><?php echo date('d M Y', strtotime($application[0]['from_date'])) . " to " . date('d M Y',strtotime($application[0]['to_date'])); ?></td>
     </tr>
     <tr>

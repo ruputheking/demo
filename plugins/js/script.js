@@ -128,7 +128,7 @@ $(function() {
                         loadData();
                     }
                     if (data == 2) {
-                        toastr.error('You are not allowed to take leave for this month');
+                        toastr.error('You are not allowed to take leave');
                         loadData();
                     }
                     if (data == 3) {

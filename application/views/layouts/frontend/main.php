@@ -65,6 +65,9 @@
 							  	<a class="dropdown-item" href="/aamaya/attendances">Attendances Report</a>
 							  </li>
 							  <li>
+							  	<a class="dropdown-item" href="/aamaya/backend/leavetypes">Leave Types</a>
+							  </li>
+							  <li>
 							  	<a class="dropdown-item" href="/aamaya/leaveapplications">Leave Application</a>
 							  </li>
 							  <li>
